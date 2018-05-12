@@ -11,7 +11,7 @@ platform: x64
 configuration: Release
 
 install:
-  - cmd: choco install conan 
+  - cmd: choco install conan --ignore-checksums
 
 build_script:
   - cmd: conan --version
