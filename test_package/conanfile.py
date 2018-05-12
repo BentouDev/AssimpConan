@@ -15,9 +15,12 @@ class AssimpTestConan(ConanFile):
         cmake.build()
 
     def imports(self):
-        self.copy("*.dll", dst="bin", src="bin")
-        self.copy("*.dylib*", dst="bin", src="lib")
-        self.copy('*.so*', dst='bin', src='lib')
+        if self.settings.os == "Windows":
+            self.copy("*.dll", dst="bin", src="bin")
+        else:
+            self.copy("*.dylib*", dst="bin", src="lib")
+            self.copy('*.so*', dst='bin', src='lib')
+            self.copy('*.a*', dst='bin', src='lib')
 
     def test(self):
         if not tools.cross_building(self.settings):
