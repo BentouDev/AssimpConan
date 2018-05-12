@@ -12,6 +12,7 @@ configuration: Release
 
 install:
   - cmd: choco install conan --ignore-checksums
+  - cmd: refreshenv
 
 build_script:
   - cmd: conan --version
