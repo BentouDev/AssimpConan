@@ -6,7 +6,7 @@ image:
 platform: x64
 configuration: Release
 
-build:
+build_script:
   - cmd: conan --version
   - cmd: conan create . bentoudev/yage
 
