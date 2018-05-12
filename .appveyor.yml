@@ -1,0 +1,15 @@
+version: 1.0.{build}
+
+image:
+  - Visual Studio 2017
+
+platform: x64
+configuration: Release
+
+build:
+  - cmd: conan --version
+  - cmd: conan create . bentoudev/yage
+
+on_success:
+  - cmd: conan remote add yage https://api.bintray.com/conan/bentoudev/yage
+  - cmd: conan upload Assimp/0.1@bentoudev/yage --all -r=yage

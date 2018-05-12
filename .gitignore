@@ -1,3 +1,11 @@
+# Conan temp
+tmp/
+test_package/build
+
+# IDE
+.vs
+.vscode
+
 # Prerequisites
 *.d
 
