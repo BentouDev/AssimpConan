@@ -4,4 +4,4 @@ export CC=clang-5.0
 $CXX --version
 cmake --version
 conan --version
-conan create . bentoudev/yage -s compiler=clang
+conan create . bentoudev/yage -s compiler=clang compiler.libcxxlibcxx=libc++
