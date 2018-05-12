@@ -3,8 +3,15 @@ version: 1.0.{build}
 image:
   - Visual Studio 2017
 
+cache:
+  - C:\ProgramData\chocolatey\bin -> appveyor.yml
+  - C:\ProgramData\chocolatey\lib -> appveyor.yml
+
 platform: x64
 configuration: Release
+
+install:
+  - cmd: choco install conan 
 
 build_script:
   - cmd: conan --version
