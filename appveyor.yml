@@ -3,19 +3,28 @@ version: 1.0.{build}
 image:
   - Visual Studio 2017
 
-platform:
-  - x64
-  - x86
-  - Any CPU
-
-configuration:
-  - Debug
-  - Release
-
 environment:
   PYTHON: "C:\\Python27"
   REPOSITORY_KEY:
     secure: 3jorWUxqWjnR0X8Ye5NsAurPzickp84H2a+/ILwlRA3EQXzv+jo+kv9tvI1YKyTE
+
+matrix:
+  - platform: x64
+    configuration: Release
+    build_script: 
+      - cmd: conan create . bentoudev/yage -s arch=x86_64 build_type=Release
+  - platform: x64
+    configuration: Debug
+    build_script: 
+      - cmd: conan create . bentoudev/yage -s arch=x86_64 build_type=Debug
+  - platform: x86
+    configuration: Release
+    build_script: 
+      - cmd: conan create . bentoudev/yage -s arch=x86 build_type=Release
+  - platform: x86
+    configuration: Debug
+    build_script: 
+      - cmd: conan create . bentoudev/yage -s arch=x86 build_type=Debug
 
 install:
   - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
@@ -23,10 +32,7 @@ install:
   - cmd: pip.exe install conan_package_tools
   - cmd: refreshenv
   - cmd: conan user # It creates the conan data directory
-
-build_script:
   - cmd: conan --version
-  - cmd: conan create . bentoudev/yage
 
 on_success:
   - cmd: conan remote add yage https://api.bintray.com/conan/bentoudev/yage
