@@ -29,9 +29,9 @@ install:
 build_script:
   - cmd: conan --version
   - cmd: IF %PLATFORM% == "x64" (
-      set %CONAN_ARCH%="x86_64"
+    set %CONAN_ARCH%="x86_64"
     ) ELSE (
-      set %CONAN_ARCH%=%PLATFORM%
+    set %CONAN_ARCH%=%PLATFORM%
     )
   - cmd: conan create . bentoudev/yage -s arch=%CONAN_ARCH% -s build_type=%CONFIGURATION%
 
