@@ -29,6 +29,8 @@ install:
       {
         $env:CONAN_ARCH = $env:PLATFORM;
       }
+  - cmd: echo %CONAN_ARCH%
+  - cmd: echo %CONFIGURATION%
   - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
   - cmd: pip.exe install conan --upgrade
   - cmd: pip.exe install conan_package_tools
