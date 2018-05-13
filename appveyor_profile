@@ -2,3 +2,4 @@
     os=Windows
     compiler=Visual Studio
     compiler.version=15
+    build_type=Debug

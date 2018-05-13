@@ -40,7 +40,7 @@ install:
 
 build_script:
   - cmd: conan --version
-  - cmd: conan create . bentoudev/yage --profile ./appveyor_profile -s arch=%CONAN_ARCH% -s build_type=%CONAN_TYPE%
+  - cmd: conan create . bentoudev/yage -pr ./appveyor_profile -s arch=%CONAN_ARCH% -s build_type=%CONAN_TYPE%
 
 on_success:
   - cmd: conan remote add yage https://api.bintray.com/conan/bentoudev/yage
