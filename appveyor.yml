@@ -9,7 +9,6 @@ cache:
 platform:
   - x64
   - x86
-  - Any CPU
 
 configuration:
   - Debug
@@ -29,7 +28,12 @@ install:
 
 build_script:
   - cmd: conan --version
-  - cmd: conan create . bentoudev/yage -s arch=%PLATFORM% -s build_type=%CONFIGURATION%
+  - cmd: IF %PLATFORM% == "x64" (
+      set %CONAN_ARCH%="x86_64"
+    ) ELSE (
+      set %CONAN_ARCH%=%PLATFORM%
+    )
+  - cmd: conan create . bentoudev/yage -s arch=%CONAN_ARCH% -s build_type=%CONFIGURATION%
 
 on_success:
   - cmd: conan remote add yage https://api.bintray.com/conan/bentoudev/yage
