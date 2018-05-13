@@ -21,7 +21,7 @@ environment:
 
 install:
   - ps: |
-      if ($env:PLATFORM == "x64")
+      if ($env:PLATFORM -eq "x64")
       {
         $env:CONAN_ARCH = "x86_64";
       }
