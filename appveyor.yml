@@ -29,8 +29,9 @@ install:
       {
         $env:CONAN_ARCH = $env:PLATFORM;
       }
+      $env:CONAN_TYPE = %CONFIGURATION%;
   - cmd: echo %CONAN_ARCH%
-  - cmd: echo %CONFIGURATION%
+  - cmd: echo %CONAN_TYPE%
   - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
   - cmd: pip.exe install conan --upgrade
   - cmd: pip.exe install conan_package_tools
@@ -39,7 +40,7 @@ install:
 
 build_script:
   - cmd: conan --version
-  - cmd: conan create . bentoudev/yage -s arch=%CONAN_ARCH% -s build_type=%CONFIGURATION%
+  - cmd: conan create . bentoudev/yage --profile ./appveyor_profile -s arch=%CONAN_ARCH% -s build_type=%CONAN_TYPE%
 
 on_success:
   - cmd: conan remote add yage https://api.bintray.com/conan/bentoudev/yage

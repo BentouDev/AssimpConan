@@ -1,0 +1,4 @@
+[settings]
+    os=Windows
+    compiler=Visual Studio
+    compiler.version=15
