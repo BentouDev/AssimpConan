@@ -12,6 +12,13 @@ class AssimpConan(ConanFile):
     default_options = "shared=True"
     generators = "cmake"
 
+    def build_id(self):
+        # Produce different package id for each configuration
+        self.info_build.settings.build_type = "Any"
+        self.info_build.settings.compiler = "Any"
+        self.info_build.settings.arch = "Any"
+        self.info_build.settings.os = "Any"
+
     def source(self):
         self.run("git clone https://github.com/assimp/assimp.git")
         # This small hack might be useful to guarantee proper /MT /MD linkage in MSVC
