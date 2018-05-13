@@ -29,7 +29,7 @@ install:
       {
         $env:CONAN_ARCH = $env:PLATFORM;
       }
-      $env:CONAN_TYPE = %CONFIGURATION%;
+      $env:CONAN_TYPE = $env:CONFIGURATION;
   - cmd: echo %CONAN_ARCH%
   - cmd: echo %CONAN_TYPE%
   - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
