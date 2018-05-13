@@ -2,18 +2,18 @@ from conans import ConanFile, CMake, tools
 
 class AssimpConan(ConanFile):
     name = "Assimp"
-    version = "0.1"
+    version = "0.2"
     license = "MIT"
     homepage = "https://github.com/assimp/assimp"
     url = "https://github.com/BentouDev/AssimpConan"
     description = "Assimp conan package"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
-    default_options = "shared=True"
+    default_options = "shared=False"
     generators = "cmake"
 
     def source(self):
-        self.run("git clone https://github.com/assimp/assimp.git")
+         self.run("git clone https://github.com/assimp/assimp.git")
         # This small hack might be useful to guarantee proper /MT /MD linkage in MSVC
         # if the packaged project doesn't have variables to set it properly
         tools.replace_in_file("%s/CMakeLists.txt" % ("assimp"), "PROJECT( Assimp )", """PROJECT( Assimp )
@@ -28,10 +28,8 @@ conan_basic_setup()""")
         if self.settings.os == "Windows":
             if self.settings.compiler == "gcc":
                 cmake.definitions["CONAN_CXX_FLAGS"].join("-Wa,-mbig-obj")
-            #elif self.settings.compiler == "Visual Studio":
-            #    cmake.definitions["CONAN_CXX_FLAGS"].append("/bigobj")
 
-        cmake.configure(source_folder = "assimp")
+        cmake.configure(source_folder="assimp")
         cmake.build()
 
     def package(self):
@@ -53,4 +51,3 @@ conan_basic_setup()""")
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self, folder="lib");
-
