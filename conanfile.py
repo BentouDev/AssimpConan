@@ -20,6 +20,7 @@ class AssimpConan(ConanFile):
         self.info_build.settings.os = "Any"
 
     def source(self):
+        print("Sanity check %s" % (self.settings.build_type))
         self.run("git clone https://github.com/assimp/assimp.git")
         # This small hack might be useful to guarantee proper /MT /MD linkage in MSVC
         # if the packaged project doesn't have variables to set it properly
