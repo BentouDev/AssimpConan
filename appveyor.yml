@@ -40,6 +40,7 @@ install:
   - cmd: conan user # It creates the conan data directory
 
 build_script:
+  - cmd: cmake --version
   - cmd: conan --version
   - cmd: conan create . bentoudev/yage -pr ./appveyor_profile -s build_type=%CONAN_TYPE% -s arch=%CONAN_ARCH%
 

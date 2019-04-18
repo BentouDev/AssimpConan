@@ -20,11 +20,12 @@ class AssimpConan(ConanFile):
         self.info_build.settings.os = "Any"
 
     def source(self):
-        print("Sanity check %s" % (self.settings.build_type))
         self.run("git clone https://github.com/assimp/assimp.git")
         # This small hack might be useful to guarantee proper /MT /MD linkage in MSVC
         # if the packaged project doesn't have variables to set it properly
-        tools.replace_in_file("%s/CMakeLists.txt" % ("assimp"), "PROJECT( Assimp )", """PROJECT( Assimp )
+        tools.replace_in_file("%s/CMakeLists.txt" % ("assimp"), "PROJECT( Assimp )", 
+
+"""PROJECT( Assimp )
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()""")
 
@@ -50,7 +51,7 @@ conan_basic_setup()""")
 
         # generated config.h file
         self.copy("*.h", dst="include", src="include")
-        
+
         if self.settings.os == "Windows":
             self.copy("*.lib", dst="lib", keep_path=False)
             self.copy("*.dll", dst="bin", keep_path=False)
@@ -60,5 +61,5 @@ conan_basic_setup()""")
             self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = tools.collect_libs(self, folder="lib");
+        self.cpp_info.libs = tools.collect_libs(self, folder="lib")
 
