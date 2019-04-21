@@ -55,12 +55,19 @@ def build(channel, commit, password, version):
 
     filtered_builds = []
 
-    for settings, options, env_vars, build_requires, reference in builder.items:
-        if settings['compiler'].startswith('clang'):
-            settings['compiler.libcxx'] = 'libc++'
+    # compiler_version = 0
 
-        if settings['arch'] == "x86_64" and (not compiler or settings['compiler'] == compiler):
-            filtered_builds.append([settings, options, env_vars, build_requires, reference])
+    # for settings in builder.items:
+    #     if settings['compiler.version'] > compiler_version:
+    #         compiler_version = settings['compiler.version']
+
+    for settings, options, env_vars, build_requires, reference in builder.items:
+        #if compiler_version == 0 or compiler_version == settings['compiler.version']:
+            if settings['compiler'].startswith('clang'):
+                settings['compiler.libcxx'] = 'libc++'
+
+            if settings['arch'] == "x86_64" and (not compiler or settings['compiler'] == compiler):
+                filtered_builds.append([settings, options, env_vars, build_requires, reference])
 
     builder.builds = filtered_builds
 
@@ -141,7 +148,7 @@ def execute(password):
             commit = gitData['commit']
         if STABLE_IN_GIT:
             channel = 'stable'
-        ver_parts = version.split('-1-')
+        ver_parts = version.split('-')
         if len(ver_parts) > 1:
             if build_number:
                 # Fix semvar
