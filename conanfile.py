@@ -27,7 +27,7 @@ class AssimpConan(ConanFile):
         self.info_build.settings.arch = "Any"
         self.info_build.settings.os = "Any"
 
-    def fix_linkage(self):
+    def source(self):
         # This small hack might be useful to guarantee proper /MT /MD linkage in MSVC
         # if the packaged project doesn't have variables to set it properly
         tools.replace_in_file("%s/CMakeLists.txt" % ("assimp-source"), "PROJECT( Assimp )", 
@@ -37,7 +37,6 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()""")
 
     def build(self):
-        self.fix_linkage()
         # Workaround for conan choosing cmake embedded in Visual Studio
         if platform.system() == "Windows" and 'AZURE' in os.environ:
             cmake_path = '"C:\\Program Files\\CMake\\bin\\cmake.exe"'
