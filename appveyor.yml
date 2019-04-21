@@ -29,6 +29,8 @@ install:
   #     $env:CONAN_TYPE = $env:CONFIGURATION;
   # - cmd: echo %CONAN_ARCH%
   # - cmd: echo %CONAN_TYPE%
+  - git submodule update --init --recursive
+  # Conan
   - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
   - cmd: pip.exe install conan --upgrade
   - cmd: pip.exe install conan_package_tools
