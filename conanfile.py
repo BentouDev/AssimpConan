@@ -28,7 +28,7 @@ class AssimpConan(ConanFile):
         self.info_build.settings.os = "Any"
 
     def source(self):
-        if os.system() != "Windows":
+        if platform.system() != "Windows":
             return
 
         # This small hack might be useful to guarantee proper /MT /MD linkage in MSVC
