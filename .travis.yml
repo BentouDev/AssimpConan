@@ -13,12 +13,11 @@ matrix:
   include:
     - os: linux
       compiler: clang-5
-      script:
-        - docker run --tty=false -it -v $PWD:/src --workdir /src bentou/ubuntuartfuldev sh ./build_clang.sh
     - os: linux
       compiler: gcc-6
-      script:
-        - docker run --tty=false -it -v $PWD:/src --workdir /src bentou/ubuntuartfuldev sh ./build_gcc.sh
+
+script:
+  - docker run -e "CI" -e "TRAVIS" -e "TRAVIS_COMMIT" -e "TRAVIS_TAG" -e "REPOSITORY_KEY" --tty=false -it -v $PWD:/src --workdir /src bentou/ubuntuartfuldev python ./build.py
 
 before_script:
   - docker pull bentou/ubuntuartfuldev
@@ -27,3 +26,7 @@ before_script:
 
 after_success:
   - docker run -it -v $PWD:/src --workdir /src bentou/ubuntuartfuldev sh ./upload_travis.sh
+
+env:
+  global:
+    H3l+NCd900ZcmlUtnbZmlzk6BbqeLlcSF45nEazC8+D3pbtsI0I7iIjTDVLR7Km6/0y2VHR5mOQ/+2ch9PAGP5JH+YDEYpY0pp3NbUM94binOsChMkq0vw7LDtMiaC3A6+2iGfdET8X7TNLBRRh19Rw0udcfLODKRMJUhBh6hiKVEpSYAl8seQSfuLuSXJWhHjr+3mk2nZkmAlBN4dJU919xy5196LlXH7VnEKjtUPf3a+5aDRVMw/wSrXG9vzD6Oqc6PzaOVEp4JmMfeDjqQn/lzH3Kf1GGAn+gP5kA7gkk8DdjBUpVJ0PQGSn1X7w2R+eYtVX93hd3LOYKrWYjnjMGPT/yi9xQEA/lQilsFj8PJThOgcoX+zDvF/DlgorI4Mh5IsBWovf/JFQGphTFQIBBSZcSg7OKILAJiJhm8XOZuZYpTUM1Msp31Z2oeqDtAchxT8HSEtbugBk5cCtxq4Eua9NFDJfLWgf4Wi0k0qfpTVAms29lr2g8PcCDExWTu89tWnLZVnO8Krsuw8MwLxgBnnZjOSsj4Zrq8XgoWFy7qOFFlNTwQLwxrq7yfZqPWKZJ2Hm3a4aGj4GxLgkPhpHK7Js2gfNFcSLK+68kreoWQqxFxTBFUqV7P96nc6AuDoPzVP4n8o7l53ap2/1s3hhZ7TJve3OmgCSEce4PgTg= -r yage bentoudev

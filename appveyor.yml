@@ -2,37 +2,33 @@ version: 1.0.{build}
 
 image:
   - Visual Studio 2017
-  - Visual Studio 2019 Preview
+#  - Visual Studio 2019 Preview
 
 cache:
   - '%LOCALAPPDATA%\pip\Cache'
 
 platform:
   - x64
-  - x86
-
-configuration:
-  - Debug
-  - Release
 
 environment:
   PYTHON: "C:\\Python27"
+  CONAN_VISUAL_VERSION: 15
   REPOSITORY_KEY:
     secure: 3jorWUxqWjnR0X8Ye5NsAurPzickp84H2a+/ILwlRA3EQXzv+jo+kv9tvI1YKyTE
 
 install:
-  - ps: |
-      if ($env:PLATFORM -eq "x64")
-      {
-        $env:CONAN_ARCH = "x86_64";
-      }
-      else
-      {
-        $env:CONAN_ARCH = $env:PLATFORM;
-      }
-      $env:CONAN_TYPE = $env:CONFIGURATION;
-  - cmd: echo %CONAN_ARCH%
-  - cmd: echo %CONAN_TYPE%
+  # - ps: |
+  #     if ($env:PLATFORM -eq "x64")
+  #     {
+  #       $env:CONAN_ARCH = "x86_64";
+  #     }
+  #     else
+  #     {
+  #       $env:CONAN_ARCH = $env:PLATFORM;
+  #     }
+  #     $env:CONAN_TYPE = $env:CONFIGURATION;
+  # - cmd: echo %CONAN_ARCH%
+  # - cmd: echo %CONAN_TYPE%
   - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
   - cmd: pip.exe install conan --upgrade
   - cmd: pip.exe install conan_package_tools
@@ -42,9 +38,10 @@ install:
 build_script:
   - cmd: cmake --version
   - cmd: conan --version
-  - cmd: conan create . bentoudev/yage -pr ./appveyor_profile -s build_type=%CONAN_TYPE% -s arch=%CONAN_ARCH%
+  - cmd: python build.py
+  #- cmd: conan create . bentoudev/yage -pr ./appveyor_profile -s build_type=%CONAN_TYPE% -s arch=%CONAN_ARCH%
 
-on_success:
-  - cmd: conan remote add yage https://api.bintray.com/conan/bentoudev/yage
-  - cmd: conan user -p %REPOSITORY_KEY% -r yage bentoudev
-  - cmd: conan upload Assimp/0.1@bentoudev/yage --all -r=yage  
+# on_success:
+#   - cmd: conan remote add yage https://api.bintray.com/conan/bentoudev/yage
+#   - cmd: conan user -p %REPOSITORY_KEY% -r yage bentoudev
+#   - cmd: conan upload Assimp/0.1@bentoudev/yage --all -r=yage  

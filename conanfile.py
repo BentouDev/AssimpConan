@@ -37,6 +37,7 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()""")
 
     def build(self):
+        self.fix_linkage()
         # Workaround for conan choosing cmake embedded in Visual Studio
         if platform.system() == "Windows" and 'AZURE' in os.environ:
             cmake_path = '"C:\\Program Files\\CMake\\bin\\cmake.exe"'
