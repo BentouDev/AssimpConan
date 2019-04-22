@@ -2,7 +2,6 @@ version: 1.0.{build}
 
 image:
   - Visual Studio 2017
-#  - Visual Studio 2019 Preview
 
 cache:
   - '%LOCALAPPDATA%\pip\Cache'
@@ -12,7 +11,7 @@ platform:
 
 environment:
   PYTHON: "C:\\Python27"
-  CONAN_VISUAL_VERSION: 15
+  CONAN_VISUAL_VERSIONS: 15
   REPOSITORY_KEY:
     secure: 3jorWUxqWjnR0X8Ye5NsAurPzickp84H2a+/ILwlRA3EQXzv+jo+kv9tvI1YKyTE
 
