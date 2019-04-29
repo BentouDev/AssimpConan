@@ -50,6 +50,7 @@ conan_basic_setup()""")
         cmake = CMake(self)
         cmake.definitions["ASSIMP_BUILD_TESTS"] = "OFF"
         cmake.definitions["ASSIMP_BUILD_SAMPLES"] = "OFF"
+        cmake.definitions["ASSIMP_BUILD_ASSIMP_TOOLS"] = "OFF"
 
         if self.settings.os == "Windows":
             if self.settings.compiler == "gcc":

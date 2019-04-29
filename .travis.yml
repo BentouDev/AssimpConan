@@ -20,7 +20,7 @@ matrix:
     env: CXX=g++ CC=gcc
 
 script:
-  - docker run -e "CI" -e "TRAVIS" -e "TRAVIS_COMMIT" -e "TRAVIS_TAG" -e "TRAVIS_BUILD_NUMBER" -e "REPOSITORY_KEY" --tty=false -it -v $PWD:/src --workdir /src bentou/ubuntu-bionic-dev python3 ./build.py
+  - docker run -e "CXX" -e "CC" -e "CI" -e "TRAVIS" -e "TRAVIS_COMMIT" -e "TRAVIS_TAG" -e "TRAVIS_BUILD_NUMBER" -e "REPOSITORY_KEY" --tty=false -it -v $PWD:/src --workdir /src bentou/ubuntu-bionic-dev python3 ./build.py
 
 before_script:
   - docker pull bentou/ubuntu-bionic-dev
