@@ -67,7 +67,7 @@ def build(channel, commit, password, version):
     for settings, options, env_vars, build_requires, reference in builder.items:
         if settings['arch'] == "x86_64" and (not compiler or settings['compiler'] == compiler):
 
-            if settings['compiler'].startswith('clang'):
+            if settings['compiler'].startswith('clang') and settings['compiler.version'] == 6:
                 for libcxx in ['libc++', 'libstdc++']:
                     sets = settings.copy()
                     sets['compiler.libcxx'] = libcxx
