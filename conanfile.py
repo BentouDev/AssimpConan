@@ -17,8 +17,8 @@ class AssimpConan(ConanFile):
     generators = "cmake"
     exports_sources = ["assimp-source/*"]
 
-    options = {"shared": [True, False],"build_type": ["Release", "Debug", "RelWithDebInfo", "MinSizeRel"]}
-    default_options = {"build_type":"MinSizeRel", "shared":"True"}
+    options = {"shared": [True, False]}
+    default_options = {"shared":"True"}
 
     def build_id(self):
         # Produce different package id for each configuration
