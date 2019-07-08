@@ -1,13 +1,14 @@
 version: 1.0.{build}
 
-matrix:
-  - image:
-    - Visual Studio 2017
-    environment:
+environment:
+  PYTHON: "C:\\Python27"
+  CONAN_VISUAL_VERSIONS: 15
+  REPOSITORY_KEY:
+    secure: 3jorWUxqWjnR0X8Ye5NsAurPzickp84H2a+/ILwlRA3EQXzv+jo+kv9tvI1YKyTE
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       CONAN_VISUAL_VERSIONS: 15
-  - image:
-    - Visual Studio 2019
-    environment:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       CONAN_VISUAL_VERSIONS: 16
 
 cache:
@@ -15,11 +16,6 @@ cache:
 
 platform:
   - x64
-
-environment:
-  PYTHON: "C:\\Python27"
-  REPOSITORY_KEY:
-    secure: 3jorWUxqWjnR0X8Ye5NsAurPzickp84H2a+/ILwlRA3EQXzv+jo+kv9tvI1YKyTE
 
 install:
   # - ps: |
