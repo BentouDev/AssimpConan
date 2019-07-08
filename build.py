@@ -65,11 +65,17 @@ def build(channel, commit, password, version):
     #         compiler_version = settings['compiler.version']
 
     for settings, options, env_vars, build_requires, reference in builder.items:
+        if settings['os'] == "Windows":
+            sets = settings.copy()
+            sets['os_build'] = "Windows"
+            filtered_builds.append([sets, options, env_vars, build_requires, reference])
+            continue
+
         if settings['arch'] == "x86_64" and (not compiler or settings['compiler'] == compiler):
 
             if settings['compiler'].startswith('clang'):
                 if not settings['compiler.version'].startswith('6'):
-                    continue;
+                    continue
                 for libcxx in ['libc++', 'libstdc++']:
                     sets = settings.copy()
                     sets['compiler.libcxx'] = libcxx
