@@ -12,8 +12,8 @@ services:
 matrix:
   include:
   - os: linux
-    compiler: clang-5
-    env: CXX=clang++-5 CC=clang-5
+    compiler: clang
+    env: CXX=clang++ CC=clang
 
   - os: linux
     compiler: gcc-6
