@@ -75,20 +75,20 @@ def build(channel, commit, password, version):
 
     for settings, options, env_vars, build_requires, reference in builder.items:
         if settings['arch'] == "x86_64" and (not compiler or settings['compiler'] == compiler):
-            sets = settings.copy()
             if settings['compiler'].startswith('clang'):
                 if not settings['compiler.version'].startswith('6'):
                     continue
                 for libcxx in ['libc++', 'libstdc++']:
+                    sets = settings.copy()
                     sets['compiler.libcxx'] = libcxx
                     filtered_builds.append([sets, options, env_vars, build_requires, reference])
 
             elif settings['compiler'].startswith('Visual'):
                 if settings['compiler.runtime'].startswith('MT'):
                     continue
-                filtered_builds.append([sets, options, env_vars, build_requires, reference])
+                filtered_builds.append([settings, options, env_vars, build_requires, reference])
             else:
-                filtered_builds.append([sets, options, env_vars, build_requires, reference])
+                filtered_builds.append([settings, options, env_vars, build_requires, reference])
 
     builder.builds = filtered_builds
 
