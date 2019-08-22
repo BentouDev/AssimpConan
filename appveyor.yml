@@ -6,17 +6,18 @@ environment:
   REPOSITORY_KEY:
     secure: 3jorWUxqWjnR0X8Ye5NsAurPzickp84H2a+/ILwlRA3EQXzv+jo+kv9tvI1YKyTE
   matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      CONAN_VISUAL_VERSIONS: 15
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      CONAN_VISUAL_VERSIONS: 16
-
-environment:
-  matrix:
     - CONAN_BUILD_TYPES: Release
     - CONAN_BUILD_TYPES: Debug
     - CONAN_BUILD_TYPES: RelWithDebInfo
     - CONAN_BUILD_TYPES: MinSizeRel
+
+matrix:
+  - environment:
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    CONAN_VISUAL_VERSIONS: 15
+  - environment:
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    CONAN_VISUAL_VERSIONS: 16
 
 cache:
   - '%LOCALAPPDATA%\pip\Cache'
