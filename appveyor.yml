@@ -10,6 +10,8 @@ environment:
       CONAN_VISUAL_VERSIONS: 15
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       CONAN_VISUAL_VERSIONS: 16
+
+environment:
   matrix:
     - CONAN_BUILD_TYPES: Release
     - CONAN_BUILD_TYPES: Debug
