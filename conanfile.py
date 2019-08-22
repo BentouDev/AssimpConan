@@ -20,13 +20,6 @@ class AssimpConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = {"shared":"True"}
 
-    def build_id(self):
-        # Produce different package id for each configuration
-        self.info_build.settings.build_type = "Any"
-        self.info_build.settings.compiler = "Any"
-        self.info_build.settings.arch = "Any"
-        self.info_build.settings.os = "Any"
-
     def source(self):
         if platform.system() != "Windows":
             return
