@@ -13,14 +13,11 @@ env:
   - CONAN_BUILD_TYPES=Release
   - CONAN_BUILD_TYPES=Debug
 
-matrix:
-  include:
-  - os: linux
-    compiler: clang
-    env: CXX=clang++ CC=clang
-  - os: linux
-    compiler: gcc-6
-    env: CXX=g++ CC=gcc
+os: linux
+
+env:
+  - CXX=clang++ CC=clang
+  - CXX=g++ CC=gcc
 
 script:
 - docker run -e "CXX" -e "CC" -e "CI" -e "TRAVIS" -e "TRAVIS_COMMIT" -e "TRAVIS_TAG"
