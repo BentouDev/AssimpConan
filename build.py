@@ -83,6 +83,11 @@ def build(channel, commit, password, version):
                     sets['compiler.libcxx'] = libcxx
                     filtered_builds.append([sets, options, env_vars, build_requires, reference])
 
+            if settings['compiler'].startswith('gcc'):
+                for major_version in ['7', '8']:
+                    if not settings['compiler.version'].startswith(major_version):
+                        continue
+
             elif settings['compiler'].startswith('Visual'):
                 if settings['compiler.runtime'].startswith('MT'):
                     continue
