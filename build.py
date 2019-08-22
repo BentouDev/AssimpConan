@@ -87,7 +87,7 @@ def build(channel, commit, password, version):
                 if settings['compiler.runtime'].startswith('MT'):
                     continue
 
-            filtered_builds.append([sets, options, env_vars, build_requires, reference])
+                filtered_builds.append([sets, options, env_vars, build_requires, reference])
 
     builder.builds = filtered_builds
 
