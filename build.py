@@ -82,12 +82,11 @@ def build(channel, commit, password, version):
                 for libcxx in ['libc++', 'libstdc++']:
                     sets['compiler.libcxx'] = libcxx
                     filtered_builds.append([sets, options, env_vars, build_requires, reference])
-                    continue
-                    
-            if settings['compiler'].startswith('Visual'):
+
+            else if settings['compiler'].startswith('Visual'):
                 if settings['compiler.runtime'].startswith('MT'):
                     continue
-            
+
             filtered_builds.append([sets, options, env_vars, build_requires, reference])
 
     builder.builds = filtered_builds
