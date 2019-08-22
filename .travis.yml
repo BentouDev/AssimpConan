@@ -11,11 +11,16 @@ env:
 
 os: linux
 
-env:
-  - CXX=clang++ CC=clang CONAN_BUILD_TYPES=Release
-  - CXX=clang++ CC=clang CONAN_BUILD_TYPES=Debug
-  - CXX=g++ CC=gcc CONAN_BUILD_TYPES=Release
-  - CXX=g++ CC=gcc CONAN_BUILD_TYPES=Debug
+matrix:
+  include:
+    - env: CXX=clang++ CC=clang CONAN_BUILD_TYPES=Release
+      compiler: clang
+    - env: CXX=clang++ CC=clang CONAN_BUILD_TYPES=Debug
+      compiler: clang
+    - env: CXX=g++ CC=gcc CONAN_BUILD_TYPES=Release
+      compiler: gcc
+    - env: CXX=g++ CC=gcc CONAN_BUILD_TYPES=Debug
+      compiler: gcc
 
 script:
 - docker run -e "CXX" -e "CC" -e "CI" -e "TRAVIS" -e "TRAVIS_COMMIT" -e "TRAVIS_TAG"
