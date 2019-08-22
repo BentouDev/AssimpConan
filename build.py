@@ -87,6 +87,7 @@ def build(channel, commit, password, version):
                 for major_version in ['7', '8']:
                     if not settings['compiler.version'].startswith(major_version):
                         continue
+                    filtered_builds.append([settings, options, env_vars, build_requires, reference])
 
             elif settings['compiler'].startswith('Visual'):
                 if settings['compiler.runtime'].startswith('MT'):
