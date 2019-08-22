@@ -5,6 +5,13 @@ environment:
   CONAN_VISUAL_VERSIONS: 15
   REPOSITORY_KEY:
     secure: 3jorWUxqWjnR0X8Ye5NsAurPzickp84H2a+/ILwlRA3EQXzv+jo+kv9tvI1YKyTE
+
+  CONAN_BUILD_TYPES:
+    - Release
+    - Debug
+    - RelWithDebInfo
+    - MinSizeRel
+
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       CONAN_VISUAL_VERSIONS: 15

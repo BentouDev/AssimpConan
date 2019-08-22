@@ -9,6 +9,10 @@ env:
   global:
     secure: GfhChySiaRz8DuAwBuv4lWjr+ddUHg0q8Qose6mwT3wQg+LciiaYMGvNnmPpgo+O1o+T6x6YXhpTxWcHLiy8Z05iCe1snJ4sAYZasrigDplrTN4gLdNrXp3w7c7xbPB3Z9QUr05ubozVqXPTYZrEU9qgnvrUUnUPH8AmB/5uPIFxmy0fwM5QoZTkxSjQZ4ElJXA4tB7KTNT5X2q0RsSPtjRo3u0R6Ib+EajV2d2adAq2pOd806/aUmlWFsd3VDLM3uwrzF6F6fbCNS4bOIi4PfnpS/IbWBh0/PVtU4YkdUtFvTqAq6w1Jz6zBHA4xgCR3XiqXEXGLMMVl6MJ1F46bEX2kQw4StgzMkmIdmCT4/3lFX2qtDakyi5WMM63AF+3xVFWvKs9go2R5W5qc5kjLqyN9xDPVW8KNorIoO2VGoR+v/xNGNV7IFvLnKIvhDWcRH4Vl0Cqe8jlPhQakQUxrWhfX3vMgEbJ4tJZZp+txSyWr1nIGhK2GYLprOde6lqYqnRduwmA0ln4l8TDXqB1fM6aMeg4aPjwc9Snm1GXLO9cSUJGyUeNaWAeSacqxj3FHnewI3M9w0DojvXcOAIz3/1d0oH4urnSLV6lfaWZoRfcZYDJOxdqWAOij0FZmwVKws967oDx0m8U+Aukxd8wJo50A7fyUH6AXRzcmTUi92s=
 
+env:
+  - CONAN_BUILD_TYPES=Release
+  - CONAN_BUILD_TYPES=Debug
+
 matrix:
   include:
   - os: linux
@@ -17,6 +21,7 @@ matrix:
   - os: linux
     compiler: gcc-6
     env: CXX=g++ CC=gcc
+
 script:
 - docker run -e "CXX" -e "CC" -e "CI" -e "TRAVIS" -e "TRAVIS_COMMIT" -e "TRAVIS_TAG"
   -e "TRAVIS_BUILD_NUMBER" -e "REPOSITORY_KEY" --tty=false -it -v $PWD:/src --workdir

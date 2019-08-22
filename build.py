@@ -11,8 +11,6 @@ STABLE_IN_GIT = True
 
 username = "bentoudev"
 
-# build_types = ["Release", "Debug", "RelWithDebInfo", "MinSizeRel"],
-
 def createBuilder(channel, commit, password, version):
     branch_pattern = 'release*' # channel is set explicitly!
 
@@ -23,10 +21,13 @@ def createBuilder(channel, commit, password, version):
         visual_versions = [ver]
         print(" [info] Selected Visual Studio version " + ver)
 
-    if platform.system() == "Windows":
-        build_types = ["Release", "Debug", "RelWithDebInfo", "MinSizeRel"]
+    if not "CONAN_BUILD_TYPES" in os.environ:
+        if platform.system() == "Windows":
+            build_types = ["Release", "Debug", "RelWithDebInfo", "MinSizeRel"]
+        else:
+            build_types = ["Release", "Debug"]
     else:
-        build_types = ["Release", "Debug"]
+        build_types = os.environ["CONAN_BUILD_TYPES"].split()
 
     if password:
          return ConanMultiPackager(username=username,
