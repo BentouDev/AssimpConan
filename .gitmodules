@@ -1,3 +1,6 @@
 [submodule "assimp-source"]
 	path = assimp-source
 	url = https://github.com/assimp/assimp.git
+[submodule "conan-base"]
+	path = conan-base
+	url = https://github.com/BentouDev/conan-base.git
